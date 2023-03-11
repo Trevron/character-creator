@@ -1,0 +1,473 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxomxbx52p5g5"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_8daia"]
+[ext_resource type="PackedScene" uid="uid://v01b1gc4nquj" path="res://player_base.tscn" id="1_mmuss"]
+[ext_resource type="Script" path="res://SaveImage.gd" id="3_vmtdi"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_8daia")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.168627, 0.270588, 0.360784, 1)
+metadata/_edit_lock_ = true
+
+[node name="Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 550.0
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Interface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.258824, 0.286275, 0.34902, 1)
+
+[node name="Colors" type="VBoxContainer" parent="Interface"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -248.0
+offset_right = 267.0
+offset_bottom = -8.0
+grow_vertical = 0
+theme_override_constants/separation = 16
+
+[node name="Hair" type="HBoxContainer" parent="Interface/Colors"]
+layout_mode = 2
+
+[node name="Color" type="ColorPickerButton" parent="Interface/Colors/Hair"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/Colors/Hair"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Hair Color"
+
+[node name="Eyes" type="HBoxContainer" parent="Interface/Colors"]
+layout_mode = 2
+
+[node name="Color" type="ColorPickerButton" parent="Interface/Colors/Eyes"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/Colors/Eyes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Eye Color"
+
+[node name="Skin" type="HBoxContainer" parent="Interface/Colors"]
+layout_mode = 2
+
+[node name="Color" type="ColorPickerButton" parent="Interface/Colors/Skin"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/Colors/Skin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Skin Color"
+
+[node name="Mouth" type="HBoxContainer" parent="Interface/Colors"]
+layout_mode = 2
+
+[node name="Color" type="ColorPickerButton" parent="Interface/Colors/Mouth"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/Colors/Mouth"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Mouth Color"
+
+[node name="Controls" type="VBoxContainer" parent="Interface"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -148.5
+offset_right = 277.0
+offset_bottom = 84.5
+grow_vertical = 2
+
+[node name="HairFront" type="HBoxContainer" parent="Interface/Controls"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="Previous" type="Button" parent="Interface/Controls/HairFront"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="Label" type="Label" parent="Interface/Controls/HairFront"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Hair Front"
+
+[node name="Next" type="Button" parent="Interface/Controls/HairFront"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = ">"
+
+[node name="HairBack" type="HBoxContainer" parent="Interface/Controls"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="Previous" type="Button" parent="Interface/Controls/HairBack"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="Label" type="Label" parent="Interface/Controls/HairBack"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Hair Back"
+
+[node name="Next" type="Button" parent="Interface/Controls/HairBack"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = ">"
+
+[node name="Head" type="HBoxContainer" parent="Interface/Controls"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="Previous" type="Button" parent="Interface/Controls/Head"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="Label" type="Label" parent="Interface/Controls/Head"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Head"
+
+[node name="Next" type="Button" parent="Interface/Controls/Head"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = ">"
+
+[node name="Nose" type="HBoxContainer" parent="Interface/Controls"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="Previous" type="Button" parent="Interface/Controls/Nose"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="Label" type="Label" parent="Interface/Controls/Nose"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Nose"
+
+[node name="Next" type="Button" parent="Interface/Controls/Nose"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = ">"
+
+[node name="Mouth" type="VBoxContainer" parent="Interface"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -260.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 282.0
+grow_horizontal = 0
+
+[node name="Mouth" type="HBoxContainer" parent="Interface/Mouth"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="Previous" type="Button" parent="Interface/Mouth/Mouth"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="Label" type="Label" parent="Interface/Mouth/Mouth"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Mouth"
+
+[node name="Next" type="Button" parent="Interface/Mouth/Mouth"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = ">"
+
+[node name="MouthSize" type="VBoxContainer" parent="Interface/Mouth"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/Mouth/MouthSize"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Mouth Size"
+horizontal_alignment = 1
+
+[node name="Size" type="HSlider" parent="Interface/Mouth/MouthSize"]
+layout_mode = 2
+
+[node name="MouthHeight" type="VBoxContainer" parent="Interface/Mouth"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/Mouth/MouthHeight"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Mouth Height"
+horizontal_alignment = 1
+
+[node name="Height" type="HSlider" parent="Interface/Mouth/MouthHeight"]
+layout_mode = 2
+min_value = -120.0
+max_value = 2.08165e-12
+
+[node name="Eyes" type="VBoxContainer" parent="Interface"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -255.0
+offset_top = -148.5
+offset_bottom = 148.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Eyes" type="HBoxContainer" parent="Interface/Eyes"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="Previous" type="Button" parent="Interface/Eyes/Eyes"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="Label" type="Label" parent="Interface/Eyes/Eyes"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Eyes"
+
+[node name="Next" type="Button" parent="Interface/Eyes/Eyes"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = ">"
+
+[node name="EyeSize" type="VBoxContainer" parent="Interface/Eyes"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/Eyes/EyeSize"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Eye Size"
+horizontal_alignment = 1
+
+[node name="Size" type="HSlider" parent="Interface/Eyes/EyeSize"]
+layout_mode = 2
+
+[node name="EyeDistance" type="VBoxContainer" parent="Interface/Eyes"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/Eyes/EyeDistance"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Eye Distance"
+horizontal_alignment = 1
+
+[node name="Distance" type="HSlider" parent="Interface/Eyes/EyeDistance"]
+layout_mode = 2
+
+[node name="EyeRotation" type="VBoxContainer" parent="Interface/Eyes"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/Eyes/EyeRotation"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Eye Rotation"
+horizontal_alignment = 1
+
+[node name="Rotation" type="HSlider" parent="Interface/Eyes/EyeRotation"]
+layout_mode = 2
+min_value = -180.0
+max_value = 180.0
+step = 5.0
+
+[node name="Brows" type="VBoxContainer" parent="Interface"]
+layout_mode = 1
+offset_left = 6.0
+offset_top = 5.0
+offset_right = 261.0
+offset_bottom = 309.0
+
+[node name="Brows" type="HBoxContainer" parent="Interface/Brows"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="Previous" type="Button" parent="Interface/Brows/Brows"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="Label" type="Label" parent="Interface/Brows/Brows"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Brows"
+
+[node name="Next" type="Button" parent="Interface/Brows/Brows"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = ">"
+
+[node name="BrowHeight" type="VBoxContainer" parent="Interface/Brows"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/Brows/BrowHeight"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Brow Height"
+horizontal_alignment = 1
+
+[node name="Height" type="HSlider" parent="Interface/Brows/BrowHeight"]
+layout_mode = 2
+max_value = 120.0
+
+[node name="BrowDistance" type="VBoxContainer" parent="Interface/Brows"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/Brows/BrowDistance"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Brow Distance"
+horizontal_alignment = 1
+
+[node name="Distance" type="HSlider" parent="Interface/Brows/BrowDistance"]
+layout_mode = 2
+
+[node name="BrowSize" type="VBoxContainer" parent="Interface/Brows"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/Brows/BrowSize"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Brow Size"
+horizontal_alignment = 1
+
+[node name="Size" type="HSlider" parent="Interface/Brows/BrowSize"]
+layout_mode = 2
+
+[node name="SaveImage" type="Button" parent="Interface"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -61.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Save Image"
+script = ExtResource("3_vmtdi")
+
+[node name="SaveDialog" type="FileDialog" parent="Interface/SaveImage"]
+initial_position = 2
+title = "Save your image"
+size = Vector2i(600, 400)
+access = 2
+
+[node name="Window" type="SubViewportContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = -420.0
+offset_right = 694.0
+offset_bottom = 348.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Portrait" type="SubViewport" parent="Window"]
+transparent_bg = true
+size = Vector2i(768, 768)
+size_2d_override = Vector2i(1000, 1000)
+
+[node name="PlayerBase" parent="Window/Portrait" instance=ExtResource("1_mmuss")]
+position = Vector2(384, 384)
+
+[connection signal="color_changed" from="Interface/Colors/Hair/Color" to="." method="_on_hair_color_changed"]
+[connection signal="color_changed" from="Interface/Colors/Eyes/Color" to="." method="_on_eye_color_changed"]
+[connection signal="color_changed" from="Interface/Colors/Skin/Color" to="." method="_on_skin_color_changed"]
+[connection signal="color_changed" from="Interface/Colors/Mouth/Color" to="." method="_on_mouth_color_changed"]
+[connection signal="pressed" from="Interface/Controls/HairFront/Previous" to="." method="_on_hair_front_previous_pressed"]
+[connection signal="pressed" from="Interface/Controls/HairFront/Next" to="." method="_on_hair_front_next_pressed"]
+[connection signal="pressed" from="Interface/Controls/HairBack/Previous" to="." method="_on_hair_back_previous_pressed"]
+[connection signal="pressed" from="Interface/Controls/HairBack/Next" to="." method="_on_hair_back_next_pressed"]
+[connection signal="pressed" from="Interface/Controls/Head/Previous" to="." method="_on_head_previous_pressed"]
+[connection signal="pressed" from="Interface/Controls/Head/Next" to="." method="_on_head_next_pressed"]
+[connection signal="pressed" from="Interface/Controls/Nose/Previous" to="." method="_on_nose_previous_pressed"]
+[connection signal="pressed" from="Interface/Controls/Nose/Next" to="." method="_on_nose_next_pressed"]
+[connection signal="pressed" from="Interface/Mouth/Mouth/Previous" to="." method="_on_mouth_previous_pressed"]
+[connection signal="pressed" from="Interface/Mouth/Mouth/Next" to="." method="_on_mouth_next_pressed"]
+[connection signal="value_changed" from="Interface/Mouth/MouthSize/Size" to="." method="_on_mouth_size_value_changed"]
+[connection signal="value_changed" from="Interface/Mouth/MouthHeight/Height" to="." method="_on_mouth_height_value_changed"]
+[connection signal="pressed" from="Interface/Eyes/Eyes/Previous" to="." method="_on_eyes_previous_pressed"]
+[connection signal="pressed" from="Interface/Eyes/Eyes/Next" to="." method="_on_eyes_next_pressed"]
+[connection signal="value_changed" from="Interface/Eyes/EyeSize/Size" to="." method="_on_eye_size_value_changed"]
+[connection signal="value_changed" from="Interface/Eyes/EyeDistance/Distance" to="." method="_on_eye_distance_value_changed"]
+[connection signal="value_changed" from="Interface/Eyes/EyeRotation/Rotation" to="." method="_on_eye_rotation_value_changed"]
+[connection signal="pressed" from="Interface/Brows/Brows/Previous" to="." method="_on_brow_previous_pressed"]
+[connection signal="pressed" from="Interface/Brows/Brows/Next" to="." method="_on_brow_next_pressed"]
+[connection signal="value_changed" from="Interface/Brows/BrowHeight/Height" to="." method="_on_brow_height_value_changed"]
+[connection signal="value_changed" from="Interface/Brows/BrowDistance/Distance" to="." method="_on_brow_distance_value_changed"]
+[connection signal="value_changed" from="Interface/Brows/BrowSize/Size" to="." method="_on_brow_size_value_changed"]
+[connection signal="pressed" from="Interface/SaveImage" to="Interface/SaveImage" method="_on_pressed"]
+[connection signal="canceled" from="Interface/SaveImage/SaveDialog" to="Interface/SaveImage" method="_on_save_dialog_canceled"]
+[connection signal="dir_selected" from="Interface/SaveImage/SaveDialog" to="Interface/SaveImage" method="_on_save_dialog_dir_selected"]
+[connection signal="file_selected" from="Interface/SaveImage/SaveDialog" to="Interface/SaveImage" method="_on_save_dialog_file_selected"]

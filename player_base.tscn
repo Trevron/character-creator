@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://v01b1gc4nquj"]
+
+[ext_resource type="Script" path="res://player_base.gd" id="1_5b4at"]
+[ext_resource type="Texture2D" uid="uid://d4g8uw76cvohs" path="res://Character/Hairs/Back/HAIR-1.png" id="2_82b7c"]
+[ext_resource type="Texture2D" uid="uid://xqsers551tma" path="res://Character/Heads/HEAD-1.png" id="3_md5om"]
+[ext_resource type="Texture2D" uid="uid://c54lnjeqoogwa" path="res://Character/Eyes/EYE-1.png" id="4_23dxi"]
+[ext_resource type="Texture2D" uid="uid://btmy33tr3w63" path="res://Character/Pupils/PUPIL-1.png" id="5_8eesd"]
+[ext_resource type="Texture2D" uid="uid://bfq67e3innnms" path="res://Character/Brows/BROW-1.png" id="6_lbupt"]
+[ext_resource type="Texture2D" uid="uid://brhomtsl0n1c4" path="res://Character/Mouths/MOUTH-1.png" id="6_rdihr"]
+[ext_resource type="Texture2D" uid="uid://cnqebcet36c6a" path="res://Character/Noses/NOSE-1.png" id="7_hcwi0"]
+[ext_resource type="Texture2D" uid="uid://d27kg62e26h75" path="res://Character/Hairs/Front/HAIR-1.png" id="8_83vab"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n51cc"]
+radius = 157.0
+height = 438.0
+
+[node name="PlayerBase" type="CharacterBody2D"]
+script = ExtResource("1_5b4at")
+metadata/_edit_group_ = true
+
+[node name="Head" type="CanvasGroup" parent="."]
+
+[node name="BHair" type="Sprite2D" parent="Head"]
+self_modulate = Color(0.611765, 0.611765, 0.611765, 1)
+texture = ExtResource("2_82b7c")
+
+[node name="Head" type="Sprite2D" parent="Head"]
+texture = ExtResource("3_md5om")
+
+[node name="EyeLeft" type="Sprite2D" parent="Head"]
+texture = ExtResource("4_23dxi")
+flip_h = true
+
+[node name="PupilLeft" type="Sprite2D" parent="Head/EyeLeft"]
+texture = ExtResource("5_8eesd")
+
+[node name="EyeRight" type="Sprite2D" parent="Head"]
+texture = ExtResource("4_23dxi")
+
+[node name="PupilRight" type="Sprite2D" parent="Head/EyeRight"]
+texture = ExtResource("5_8eesd")
+
+[node name="BrowLeft" type="Sprite2D" parent="Head"]
+texture = ExtResource("6_lbupt")
+flip_h = true
+
+[node name="BrowRight" type="Sprite2D" parent="Head"]
+texture = ExtResource("6_lbupt")
+
+[node name="Mouth" type="Sprite2D" parent="Head"]
+texture = ExtResource("6_rdihr")
+
+[node name="Nose" type="Sprite2D" parent="Head"]
+modulate = Color(1, 0.937255, 0.698039, 1)
+texture = ExtResource("7_hcwi0")
+
+[node name="FHair" type="Sprite2D" parent="Head"]
+modulate = Color(1, 0.937255, 0.698039, 1)
+texture = ExtResource("8_83vab")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_n51cc")
+
+[connection signal="brow_change" from="." to="." method="_on_brow_change"]
+[connection signal="change_brow_distance" from="." to="." method="_on_change_brow_distance"]
+[connection signal="change_brow_height" from="." to="." method="_on_change_brow_height"]
+[connection signal="change_brow_size" from="." to="." method="_on_change_brow_size"]
+[connection signal="change_eye_color" from="." to="." method="_on_change_eye_color"]
+[connection signal="change_eye_distance" from="." to="." method="_on_change_eye_distance"]
+[connection signal="change_eye_size" from="." to="." method="_on_change_eye_size"]
+[connection signal="change_hair_color" from="." to="." method="_on_change_hair_color"]
+[connection signal="change_mouth_color" from="." to="." method="_on_change_mouth_color"]
+[connection signal="change_mouth_height" from="." to="." method="_on_change_mouth_height"]
+[connection signal="change_mouth_size" from="." to="." method="_on_change_mouth_size"]
+[connection signal="change_skin_color" from="." to="." method="_on_change_skin_color"]
+[connection signal="eyes_change" from="." to="." method="_on_eyes_change"]
+[connection signal="hair_back_change" from="." to="." method="_on_hair_back_change"]
+[connection signal="hair_front_change" from="." to="." method="_on_hair_front_change"]
+[connection signal="head_change" from="." to="." method="_on_head_change"]
+[connection signal="mouth_change" from="." to="." method="_on_mouth_change"]
+[connection signal="nose_change" from="." to="." method="_on_nose_change"]
+[connection signal="rotate_eyes" from="." to="." method="_on_rotate_eyes"]
