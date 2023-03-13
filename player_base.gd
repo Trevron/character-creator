@@ -178,7 +178,7 @@ func set_dir_contents(path: String, arr: Array):
 			else:
 				if (".import" not in file_name):	
 					## print("Found file: " + path + file_name)
-					arr.append(load(path + file_name))
+					arr.append(ResourceLoader.load(path + file_name))
 			file_name = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")
