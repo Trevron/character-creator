@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxomxbx52p5g5"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_8daia"]
-[ext_resource type="PackedScene" uid="uid://v01b1gc4nquj" path="res://player_base.tscn" id="1_mmuss"]
+[ext_resource type="PackedScene" uid="uid://cw0t6b7tber43" path="res://player_base.tscn" id="1_mmuss"]
 [ext_resource type="Script" path="res://SaveImage.gd" id="3_vmtdi"]
 
 [node name="Main" type="Node"]
@@ -330,6 +330,52 @@ min_value = -180.0
 max_value = 180.0
 step = 5.0
 
+[node name="Pupils" type="VBoxContainer" parent="Interface"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -260.0
+offset_top = 221.0
+offset_right = -5.0
+offset_bottom = 382.0
+grow_horizontal = 0
+
+[node name="Pupils" type="HBoxContainer" parent="Interface/Pupils"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="Previous" type="Button" parent="Interface/Pupils/Pupils"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="Label" type="Label" parent="Interface/Pupils/Pupils"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Pupils"
+
+[node name="Next" type="Button" parent="Interface/Pupils/Pupils"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = ">"
+
+[node name="PupilSize" type="VBoxContainer" parent="Interface/Pupils"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/Pupils/PupilSize"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Pupil Size"
+horizontal_alignment = 1
+
+[node name="Size" type="HSlider" parent="Interface/Pupils/PupilSize"]
+layout_mode = 2
+
 [node name="Brows" type="VBoxContainer" parent="Interface"]
 layout_mode = 1
 offset_left = 6.0
@@ -397,6 +443,21 @@ horizontal_alignment = 1
 [node name="Size" type="HSlider" parent="Interface/Brows/BrowSize"]
 layout_mode = 2
 
+[node name="BrowRotation" type="VBoxContainer" parent="Interface/Brows"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Interface/Brows/BrowRotation"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Brow Rotation"
+horizontal_alignment = 1
+
+[node name="Rotation" type="HSlider" parent="Interface/Brows/BrowRotation"]
+layout_mode = 2
+min_value = -180.0
+max_value = 180.0
+step = 5.0
+
 [node name="SaveImage" type="Button" parent="Interface"]
 layout_mode = 1
 anchors_preset = 3
@@ -420,7 +481,28 @@ title = "Save your image"
 size = Vector2i(600, 400)
 access = 2
 
+[node name="Randomize" type="Button" parent="Interface"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -190.0
+offset_top = -128.0
+offset_right = -10.0
+offset_bottom = -75.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Randomize"
+
+[node name="PlayerBase" parent="." instance=ExtResource("1_mmuss")]
+position = Vector2(1238, 467)
+scale = Vector2(1.5, 1.5)
+
 [node name="Window" type="SubViewportContainer" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -437,10 +519,7 @@ grow_vertical = 2
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(768, 768)
-render_target_update_mode = 4
-
-[node name="PlayerBase" parent="Window/Portrait" instance=ExtResource("1_mmuss")]
-position = Vector2(384, 384)
+render_target_update_mode = 0
 
 [connection signal="color_changed" from="Interface/Colors/Hair/Color" to="." method="_on_hair_color_changed"]
 [connection signal="color_changed" from="Interface/Colors/Eyes/Color" to="." method="_on_eye_color_changed"]
@@ -463,12 +542,17 @@ position = Vector2(384, 384)
 [connection signal="value_changed" from="Interface/Eyes/EyeSize/Size" to="." method="_on_eye_size_value_changed"]
 [connection signal="value_changed" from="Interface/Eyes/EyeDistance/Distance" to="." method="_on_eye_distance_value_changed"]
 [connection signal="value_changed" from="Interface/Eyes/EyeRotation/Rotation" to="." method="_on_eye_rotation_value_changed"]
+[connection signal="pressed" from="Interface/Pupils/Pupils/Previous" to="." method="_on_pupil_previous_pressed"]
+[connection signal="pressed" from="Interface/Pupils/Pupils/Next" to="." method="_on_pupil_next_pressed"]
+[connection signal="value_changed" from="Interface/Pupils/PupilSize/Size" to="." method="_on_pupil_size_value_changed"]
 [connection signal="pressed" from="Interface/Brows/Brows/Previous" to="." method="_on_brow_previous_pressed"]
 [connection signal="pressed" from="Interface/Brows/Brows/Next" to="." method="_on_brow_next_pressed"]
 [connection signal="value_changed" from="Interface/Brows/BrowHeight/Height" to="." method="_on_brow_height_value_changed"]
 [connection signal="value_changed" from="Interface/Brows/BrowDistance/Distance" to="." method="_on_brow_distance_value_changed"]
 [connection signal="value_changed" from="Interface/Brows/BrowSize/Size" to="." method="_on_brow_size_value_changed"]
+[connection signal="value_changed" from="Interface/Brows/BrowRotation/Rotation" to="." method="_on_brow_rotation_value_changed"]
 [connection signal="pressed" from="Interface/SaveImage" to="Interface/SaveImage" method="_on_pressed"]
 [connection signal="canceled" from="Interface/SaveImage/SaveDialog" to="Interface/SaveImage" method="_on_save_dialog_canceled"]
 [connection signal="dir_selected" from="Interface/SaveImage/SaveDialog" to="Interface/SaveImage" method="_on_save_dialog_dir_selected"]
 [connection signal="file_selected" from="Interface/SaveImage/SaveDialog" to="Interface/SaveImage" method="_on_save_dialog_file_selected"]
+[connection signal="pressed" from="Interface/Randomize" to="." method="_on_randomize_pressed"]
