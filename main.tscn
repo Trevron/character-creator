@@ -499,7 +499,6 @@ text = "Randomize"
 
 [node name="PlayerBase" parent="." instance=ExtResource("1_mmuss")]
 position = Vector2(1238, 467)
-scale = Vector2(1.5, 1.5)
 
 [node name="Window" type="SubViewportContainer" parent="."]
 visible = false

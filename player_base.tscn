@@ -1,19 +1,22 @@
-[gd_scene load_steps=24 format=3 uid="uid://cw0t6b7tber43"]
+[gd_scene load_steps=27 format=3 uid="uid://cw0t6b7tber43"]
 
 [ext_resource type="Script" path="res://player_base.gd" id="1_5b4at"]
 [ext_resource type="Texture2D" uid="uid://d4g8uw76cvohs" path="res://Character/Hairs/Back/HAIR-1.png" id="2_82b7c"]
-[ext_resource type="Script" path="res://Features/Feature.gd" id="3_6xt0i"]
 [ext_resource type="Texture2D" uid="uid://xqsers551tma" path="res://Character/Heads/HEAD-1.png" id="3_md5om"]
 [ext_resource type="Script" path="res://Features/Scripts/HairRear.gd" id="3_ok5d4"]
 [ext_resource type="Texture2D" uid="uid://b1yuoymguq8c6" path="res://Character/Heads/HEAD-4.png" id="4_2jg0f"]
 [ext_resource type="Texture2D" uid="uid://c54lnjeqoogwa" path="res://Character/Eyes/EYE-1.png" id="4_23dxi"]
+[ext_resource type="Texture2D" uid="uid://bgad5xsf0c8sw" path="res://Character/Limbs/LIMB-2.png" id="5_0lnb3"]
 [ext_resource type="Texture2D" uid="uid://btmy33tr3w63" path="res://Character/Pupils/PUPIL-1.png" id="5_8eesd"]
 [ext_resource type="Script" path="res://Features/Scripts/Head.gd" id="5_s8jvh"]
+[ext_resource type="Texture2D" uid="uid://dhetr46kstw1p" path="res://Character/Hands/HandFeet-4.png" id="6_da6su"]
 [ext_resource type="Texture2D" uid="uid://bfq67e3innnms" path="res://Character/Brows/BROW-1.png" id="6_lbupt"]
 [ext_resource type="Texture2D" uid="uid://brhomtsl0n1c4" path="res://Character/Mouths/MOUTH-1.png" id="6_rdihr"]
 [ext_resource type="Script" path="res://Features/Scripts/EyeLeft.gd" id="7_8h1sq"]
+[ext_resource type="Texture2D" uid="uid://b71svsvi5gl5t" path="res://Character/Limbs/LIMB-1.png" id="7_aq84n"]
 [ext_resource type="Texture2D" uid="uid://cnqebcet36c6a" path="res://Character/Noses/NOSE-1.png" id="7_hcwi0"]
 [ext_resource type="Texture2D" uid="uid://d27kg62e26h75" path="res://Character/Hairs/Front/HAIR-1.png" id="8_83vab"]
+[ext_resource type="Texture2D" uid="uid://dmekrnrvasp73" path="res://Character/Feet/HandFeet-2.png" id="8_ot0pq"]
 [ext_resource type="Script" path="res://Features/Scripts/PupilLeft.gd" id="9_tc1do"]
 [ext_resource type="Script" path="res://Features/Scripts/EyeRight.gd" id="10_csn0o"]
 [ext_resource type="Script" path="res://Features/Scripts/PupilRight.gd" id="11_gwoc1"]
@@ -39,11 +42,71 @@ texture = ExtResource("2_82b7c")
 script = ExtResource("3_ok5d4")
 
 [node name="Body" type="Sprite2D" parent="Head"]
-visible = false
-modulate = Color(0.0235294, 0.168627, 0.215686, 1)
+self_modulate = Color(0, 0.137255, 0.137255, 1)
+position = Vector2(2.08165e-12, 250)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_2jg0f")
-offset = Vector2(2.08165e-12, 200)
-script = ExtResource("3_6xt0i")
+
+[node name="UpperArmLeft" type="Sprite2D" parent="Head/Body"]
+modulate = Color(1, 0.729412, 0.596078, 1)
+position = Vector2(-160, -100)
+texture = ExtResource("5_0lnb3")
+
+[node name="LowerArmLeft" type="Sprite2D" parent="Head/Body/UpperArmLeft"]
+position = Vector2(2.08165e-12, 150)
+texture = ExtResource("5_0lnb3")
+
+[node name="HandLeft" type="Sprite2D" parent="Head/Body/UpperArmLeft/LowerArmLeft"]
+position = Vector2(-10, 170)
+rotation = 1.5708
+texture = ExtResource("6_da6su")
+flip_v = true
+
+[node name="UpperArmRight" type="Sprite2D" parent="Head/Body"]
+modulate = Color(1, 0.729412, 0.596078, 1)
+position = Vector2(160, -100)
+texture = ExtResource("5_0lnb3")
+
+[node name="LowerArmRight" type="Sprite2D" parent="Head/Body/UpperArmRight"]
+position = Vector2(2.08165e-12, 150)
+texture = ExtResource("5_0lnb3")
+
+[node name="HandRight" type="Sprite2D" parent="Head/Body/UpperArmRight/LowerArmRight"]
+position = Vector2(15, 170)
+rotation = 1.5708
+texture = ExtResource("6_da6su")
+
+[node name="UpperLegLeft" type="Sprite2D" parent="Head/Body"]
+modulate = Color(1, 0.729412, 0.596078, 1)
+show_behind_parent = true
+position = Vector2(-80, 250)
+texture = ExtResource("7_aq84n")
+
+[node name="LowerLegLeft" type="Sprite2D" parent="Head/Body/UpperLegLeft"]
+show_behind_parent = true
+position = Vector2(2.08165e-12, 170)
+texture = ExtResource("7_aq84n")
+
+[node name="FootLeft" type="Sprite2D" parent="Head/Body/UpperLegLeft/LowerLegLeft"]
+show_behind_parent = true
+position = Vector2(50, 100)
+texture = ExtResource("8_ot0pq")
+
+[node name="UpperLegRight" type="Sprite2D" parent="Head/Body"]
+modulate = Color(1, 0.729412, 0.596078, 1)
+show_behind_parent = true
+position = Vector2(80, 250)
+texture = ExtResource("7_aq84n")
+
+[node name="LowerLegRight" type="Sprite2D" parent="Head/Body/UpperLegRight"]
+show_behind_parent = true
+position = Vector2(2.08165e-12, 170)
+texture = ExtResource("7_aq84n")
+
+[node name="FootRight" type="Sprite2D" parent="Head/Body/UpperLegRight/LowerLegRight"]
+show_behind_parent = true
+position = Vector2(50, 100)
+texture = ExtResource("8_ot0pq")
 
 [node name="Head" type="Sprite2D" parent="Head"]
 texture = ExtResource("3_md5om")
@@ -90,8 +153,7 @@ texture = ExtResource("8_83vab")
 script = ExtResource("20_47wnj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(2.08165e-12, 180)
+position = Vector2(2.08165e-12, 310)
 shape = SubResource("CapsuleShape2D_n51cc")
 
 [connection signal="brow_change" from="." to="." method="_on_brow_change"]
