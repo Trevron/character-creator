@@ -138,6 +138,8 @@ func _on_hair_rear_change(type: Change, payload):
 
 
 func _on_head_change(type: Change, payload):
+	if (type == Change.COLOR):
+		color_limbs(payload)
 	head.change_request.emit(type, payload)
 
 
