@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cw0t6b7tber43"]
+[gd_scene load_steps=33 format=3 uid="uid://cw0t6b7tber43"]
 
 [ext_resource type="Script" path="res://player_base.gd" id="1_5b4at"]
 [ext_resource type="Texture2D" uid="uid://d4g8uw76cvohs" path="res://Character/Hairs/Back/HAIR-1.png" id="2_82b7c"]
@@ -26,6 +26,49 @@
 [ext_resource type="Script" path="res://Features/Scripts/Nose.gd" id="18_nrl8y"]
 [ext_resource type="Script" path="res://Features/Scripts/HairFront.gd" id="20_47wnj"]
 
+[sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_rg30d"]
+target_nodepath = NodePath("../Targets/LeftArmTarget")
+joint_one_bone_idx = 1
+joint_one_bone2d_node = NodePath("TorsoBone/UpperArmLeftBone")
+joint_two_bone_idx = 2
+joint_two_bone2d_node = NodePath("TorsoBone/UpperArmLeftBone/LowerLeftArmBone")
+
+[sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_j32w0"]
+target_nodepath = NodePath("../Targets/RightArmTarget")
+flip_bend_direction = true
+joint_one_bone_idx = 3
+joint_one_bone2d_node = NodePath("TorsoBone/UpperRightArmBone")
+joint_two_bone_idx = 4
+joint_two_bone2d_node = NodePath("TorsoBone/UpperRightArmBone/LowerRightArmBone")
+
+[sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_ya640"]
+target_nodepath = NodePath("../Targets/LeftLegTarget")
+joint_one_bone_idx = 5
+joint_one_bone2d_node = NodePath("TorsoBone/UpperLegLeftBone")
+joint_two_bone_idx = 6
+joint_two_bone2d_node = NodePath("TorsoBone/UpperLegLeftBone/LowerLegLeftBone")
+
+[sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_6pkgx"]
+target_nodepath = NodePath("../Targets/RightLegTarget")
+joint_one_bone_idx = 7
+joint_one_bone2d_node = NodePath("TorsoBone/UpperLegRightBone")
+joint_two_bone_idx = 8
+joint_two_bone2d_node = NodePath("TorsoBone/UpperLegRightBone/LowerLegRightBone")
+
+[sub_resource type="SkeletonModification2DLookAt" id="SkeletonModification2DLookAt_fv6ke"]
+bone_index = 9
+bone2d_node = NodePath("TorsoBone/HeadBone")
+target_nodepath = NodePath("../Targets/HeadTarget")
+
+[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_anhwr"]
+enabled = true
+modification_count = 5
+modifications/0 = SubResource("SkeletonModification2DTwoBoneIK_rg30d")
+modifications/1 = SubResource("SkeletonModification2DTwoBoneIK_j32w0")
+modifications/2 = SubResource("SkeletonModification2DTwoBoneIK_ya640")
+modifications/3 = SubResource("SkeletonModification2DTwoBoneIK_6pkgx")
+modifications/4 = SubResource("SkeletonModification2DLookAt_fv6ke")
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n51cc"]
 radius = 157.0
 height = 438.0
@@ -34,125 +77,244 @@ height = 438.0
 script = ExtResource("1_5b4at")
 metadata/_edit_group_ = true
 
-[node name="Head" type="CanvasGroup" parent="."]
+[node name="Body" type="CanvasGroup" parent="."]
 
-[node name="HairRear" type="Sprite2D" parent="Head"]
+[node name="Rig" type="Node2D" parent="Body"]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="Body/Rig"]
+modification_stack = SubResource("SkeletonModificationStack2D_anhwr")
+
+[node name="HairRear" type="Sprite2D" parent="Body/Rig/Skeleton2D"]
 self_modulate = Color(0.611765, 0.611765, 0.611765, 1)
+position = Vector2(-1, 31)
+rotation = -0.0342072
+scale = Vector2(0.999949, 0.999949)
 texture = ExtResource("2_82b7c")
 script = ExtResource("3_ok5d4")
 
-[node name="Body" type="Sprite2D" parent="Head"]
+[node name="TorsoBone" type="Bone2D" parent="Body/Rig/Skeleton2D"]
+position = Vector2(0, 319)
+rest = Transform2D(1, 0, 0, 1, 0, 319)
+
+[node name="Torso" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone"]
 self_modulate = Color(0, 0.137255, 0.137255, 1)
-position = Vector2(2.08165e-12, 250)
+position = Vector2(2.08165e-12, -69)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_2jg0f")
 
-[node name="UpperArmLeft" type="Sprite2D" parent="Head/Body"]
+[node name="UpperArmLeftBone" type="Bone2D" parent="Body/Rig/Skeleton2D/TorsoBone"]
+position = Vector2(-79, -160)
+rest = Transform2D(0.834257, 0.551376, -0.551376, 0.834257, -79, -160)
+metadata/_local_pose_override_enabled_ = true
+
+[node name="UpperArmLeft" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperArmLeftBone"]
 modulate = Color(1, 0.729412, 0.596078, 1)
-position = Vector2(-160, -100)
+position = Vector2(-1, 41)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_0lnb3")
 
-[node name="LowerArmLeft" type="Sprite2D" parent="Head/Body/UpperArmLeft"]
-position = Vector2(2.08165e-12, 150)
+[node name="LowerLeftArmBone" type="Bone2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperArmLeftBone"]
+position = Vector2(0, 78)
+rotation = -1.57077
+scale = Vector2(0.999983, 0.999982)
+rest = Transform2D(0.999983, 0, 5.72194e-06, 0.999982, 0, 78)
+auto_calculate_length_and_angle = false
+length = 118.3
+bone_angle = 90.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="LowerArmLeft" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperArmLeftBone/LowerLeftArmBone"]
+position = Vector2(-1, 38)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_0lnb3")
 
-[node name="HandLeft" type="Sprite2D" parent="Head/Body/UpperArmLeft/LowerArmLeft"]
+[node name="HandLeft" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperArmLeftBone/LowerLeftArmBone/LowerArmLeft"]
 position = Vector2(-10, 170)
 rotation = 1.5708
 texture = ExtResource("6_da6su")
 flip_v = true
 
-[node name="UpperArmRight" type="Sprite2D" parent="Head/Body"]
+[node name="UpperRightArmBone" type="Bone2D" parent="Body/Rig/Skeleton2D/TorsoBone"]
+position = Vector2(81, -160)
+rotation = 1.23981
+scale = Vector2(1, 1)
+rest = Transform2D(0.532896, -0.84618, 0.846181, 0.532896, 81, -160)
+auto_calculate_length_and_angle = false
+length = 64.636
+bone_angle = 90.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="UpperArmRight" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperRightArmBone"]
 modulate = Color(1, 0.729412, 0.596078, 1)
-position = Vector2(160, -100)
+position = Vector2(-1, 41)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_0lnb3")
 
-[node name="LowerArmRight" type="Sprite2D" parent="Head/Body/UpperArmRight"]
-position = Vector2(2.08165e-12, 150)
+[node name="LowerRightArmBone" type="Bone2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperRightArmBone"]
+position = Vector2(-2, 84)
+rest = Transform2D(0.310662, -0.95052, 0.95052, 0.310662, -2, 84)
+auto_calculate_length_and_angle = false
+length = 129.069
+bone_angle = 90.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="LowerArmRight" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperRightArmBone/LowerRightArmBone"]
+position = Vector2(1, 32)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_0lnb3")
 
-[node name="HandRight" type="Sprite2D" parent="Head/Body/UpperArmRight/LowerArmRight"]
+[node name="HandRight" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperRightArmBone/LowerRightArmBone/LowerArmRight"]
 position = Vector2(15, 170)
 rotation = 1.5708
 texture = ExtResource("6_da6su")
 
-[node name="UpperLegLeft" type="Sprite2D" parent="Head/Body"]
+[node name="UpperLegLeftBone" type="Bone2D" parent="Body/Rig/Skeleton2D/TorsoBone"]
+show_behind_parent = true
+position = Vector2(-43, 6)
+rotation = 0.653195
+scale = Vector2(0.999981, 0.999982)
+skew = -2.30074e-05
+rest = Transform2D(0.982294, -0.187248, 0.187271, 0.982289, -43, 6)
+auto_calculate_length_and_angle = false
+length = 59.074
+bone_angle = 90.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="UpperLegLeft" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperLegLeftBone"]
 modulate = Color(1, 0.729412, 0.596078, 1)
 show_behind_parent = true
-position = Vector2(-80, 250)
+position = Vector2(3, 50)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_aq84n")
 
-[node name="LowerLegLeft" type="Sprite2D" parent="Head/Body/UpperLegLeft"]
+[node name="LowerLegLeftBone" type="Bone2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperLegLeftBone"]
+position = Vector2(1, 92)
+rest = Transform2D(0.875526, 0.48317, -0.48317, 0.875526, 1, 92)
+auto_calculate_length_and_angle = false
+length = 96.763
+bone_angle = 90.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="LowerLegLeft" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperLegLeftBone/LowerLegLeftBone"]
 show_behind_parent = true
-position = Vector2(2.08165e-12, 170)
+position = Vector2(2, 43)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_aq84n")
 
-[node name="FootLeft" type="Sprite2D" parent="Head/Body/UpperLegLeft/LowerLegLeft"]
+[node name="FootLeft" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperLegLeftBone/LowerLegLeftBone/LowerLegLeft"]
 show_behind_parent = true
 position = Vector2(50, 100)
 texture = ExtResource("8_ot0pq")
 
-[node name="UpperLegRight" type="Sprite2D" parent="Head/Body"]
+[node name="UpperLegRightBone" type="Bone2D" parent="Body/Rig/Skeleton2D/TorsoBone"]
+show_behind_parent = true
+position = Vector2(38, 5)
+rest = Transform2D(0.775707, -0.631093, 0.631093, 0.775707, 38, 5)
+auto_calculate_length_and_angle = false
+length = 70.768
+bone_angle = 90.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="UpperLegRight" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperLegRightBone"]
 modulate = Color(1, 0.729412, 0.596078, 1)
 show_behind_parent = true
-position = Vector2(80, 250)
+position = Vector2(2, 51)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_aq84n")
 
-[node name="LowerLegRight" type="Sprite2D" parent="Head/Body/UpperLegRight"]
+[node name="LowerLegRightBone" type="Bone2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperLegRightBone"]
+position = Vector2(0, 93)
+rest = Transform2D(0.544912, 0.838493, -0.838493, 0.544912, 0, 93)
+auto_calculate_length_and_angle = false
+length = 96.763
+bone_angle = 90.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="LowerLegRight" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperLegRightBone/LowerLegRightBone"]
 show_behind_parent = true
-position = Vector2(2.08165e-12, 170)
+position = Vector2(2, 43)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_aq84n")
 
-[node name="FootRight" type="Sprite2D" parent="Head/Body/UpperLegRight/LowerLegRight"]
+[node name="FootRight" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/UpperLegRightBone/LowerLegRightBone/LowerLegRight"]
 show_behind_parent = true
 position = Vector2(50, 100)
 texture = ExtResource("8_ot0pq")
 
-[node name="Head" type="Sprite2D" parent="Head"]
+[node name="HeadBone" type="Bone2D" parent="Body/Rig/Skeleton2D/TorsoBone"]
+position = Vector2(-1, -288)
+rest = Transform2D(0.999364, -0.0341988, 0.0341988, 0.999364, -1, -288)
+metadata/_local_pose_override_enabled_ = true
+
+[node name="HeadGroup" type="Node2D" parent="Body/Rig/Skeleton2D/TorsoBone/HeadBone"]
+position = Vector2(1, -31)
+
+[node name="Head" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup"]
 texture = ExtResource("3_md5om")
 script = ExtResource("5_s8jvh")
 
-[node name="EyeLeft" type="Sprite2D" parent="Head"]
+[node name="EyeLeft" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup"]
 texture = ExtResource("4_23dxi")
 flip_h = true
 script = ExtResource("7_8h1sq")
 
-[node name="PupilLeft" type="Sprite2D" parent="Head/EyeLeft"]
+[node name="PupilLeft" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/EyeLeft"]
 texture = ExtResource("5_8eesd")
 script = ExtResource("9_tc1do")
 
-[node name="EyeRight" type="Sprite2D" parent="Head"]
+[node name="EyeRight" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup"]
 texture = ExtResource("4_23dxi")
 script = ExtResource("10_csn0o")
 
-[node name="PupilRight" type="Sprite2D" parent="Head/EyeRight"]
+[node name="PupilRight" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/EyeRight"]
 texture = ExtResource("5_8eesd")
 script = ExtResource("11_gwoc1")
 
-[node name="BrowLeft" type="Sprite2D" parent="Head"]
+[node name="BrowLeft" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup"]
 texture = ExtResource("6_lbupt")
 flip_h = true
 script = ExtResource("13_5tsuu")
 
-[node name="BrowRight" type="Sprite2D" parent="Head"]
+[node name="BrowRight" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup"]
 texture = ExtResource("6_lbupt")
 script = ExtResource("14_xtxll")
 
-[node name="Mouth" type="Sprite2D" parent="Head"]
+[node name="Mouth" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup"]
 texture = ExtResource("6_rdihr")
 script = ExtResource("16_3q3ha")
 
-[node name="Nose" type="Sprite2D" parent="Head"]
+[node name="Nose" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup"]
 modulate = Color(1, 0.937255, 0.698039, 1)
 texture = ExtResource("7_hcwi0")
 script = ExtResource("18_nrl8y")
 
-[node name="HairFront" type="Sprite2D" parent="Head"]
+[node name="HairFront" type="Sprite2D" parent="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup"]
 modulate = Color(1, 0.937255, 0.698039, 1)
 texture = ExtResource("8_83vab")
 script = ExtResource("20_47wnj")
 
+[node name="RearHairTransform" type="RemoteTransform2D" parent="Body/Rig/Skeleton2D/TorsoBone/HeadBone"]
+remote_path = NodePath("../../../HairRear")
+
+[node name="Targets" type="Node2D" parent="Body/Rig"]
+
+[node name="LeftArmTarget" type="Node2D" parent="Body/Rig/Targets"]
+position = Vector2(-250, 109)
+
+[node name="RightArmTarget" type="Node2D" parent="Body/Rig/Targets"]
+position = Vector2(235, 111)
+
+[node name="LeftLegTarget" type="Node2D" parent="Body/Rig/Targets"]
+position = Vector2(-62, 475)
+
+[node name="RightLegTarget" type="Node2D" parent="Body/Rig/Targets"]
+position = Vector2(53, 471)
+
+[node name="HeadTarget" type="Node2D" parent="Body/Rig/Targets"]
+position = Vector2(525, 13)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(2.08165e-12, 310)
 shape = SubResource("CapsuleShape2D_n51cc")
 
@@ -166,14 +328,14 @@ shape = SubResource("CapsuleShape2D_n51cc")
 [connection signal="nose_change" from="." to="." method="_on_nose_change"]
 [connection signal="pupil_change" from="." to="." method="_on_pupil_change"]
 [connection signal="randomize_character" from="." to="." method="_on_randomize_character"]
-[connection signal="change_request" from="Head/HairRear" to="Head/HairRear" method="_on_change_request"]
-[connection signal="change_request" from="Head/Head" to="Head/Head" method="_on_change_request"]
-[connection signal="change_request" from="Head/EyeLeft" to="Head/EyeLeft" method="_on_change_request"]
-[connection signal="change_request" from="Head/EyeLeft/PupilLeft" to="Head/EyeLeft/PupilLeft" method="_on_change_request"]
-[connection signal="change_request" from="Head/EyeRight" to="Head/EyeRight" method="_on_change_request"]
-[connection signal="change_request" from="Head/EyeRight/PupilRight" to="Head/EyeRight/PupilRight" method="_on_change_request"]
-[connection signal="change_request" from="Head/BrowLeft" to="Head/BrowLeft" method="_on_change_request"]
-[connection signal="change_request" from="Head/BrowRight" to="Head/BrowRight" method="_on_change_request"]
-[connection signal="change_request" from="Head/Mouth" to="Head/Mouth" method="_on_change_request"]
-[connection signal="change_request" from="Head/Nose" to="Head/Nose" method="_on_change_request"]
-[connection signal="change_request" from="Head/HairFront" to="Head/HairFront" method="_on_change_request"]
+[connection signal="change_request" from="Body/Rig/Skeleton2D/HairRear" to="Body/Rig/Skeleton2D/HairRear" method="_on_change_request"]
+[connection signal="change_request" from="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/Head" to="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/Head" method="_on_change_request"]
+[connection signal="change_request" from="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/EyeLeft" to="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/EyeLeft" method="_on_change_request"]
+[connection signal="change_request" from="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/EyeLeft/PupilLeft" to="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/EyeLeft/PupilLeft" method="_on_change_request"]
+[connection signal="change_request" from="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/EyeRight" to="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/EyeRight" method="_on_change_request"]
+[connection signal="change_request" from="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/EyeRight/PupilRight" to="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/EyeRight/PupilRight" method="_on_change_request"]
+[connection signal="change_request" from="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/BrowLeft" to="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/BrowLeft" method="_on_change_request"]
+[connection signal="change_request" from="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/BrowRight" to="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/BrowRight" method="_on_change_request"]
+[connection signal="change_request" from="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/Mouth" to="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/Mouth" method="_on_change_request"]
+[connection signal="change_request" from="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/Nose" to="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/Nose" method="_on_change_request"]
+[connection signal="change_request" from="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/HairFront" to="Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/HairFront" method="_on_change_request"]

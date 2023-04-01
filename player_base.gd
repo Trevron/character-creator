@@ -50,87 +50,113 @@ const scale_interval = 0.01
 @export var nose_position := Vector2(0, 35)
 @export var nose_scale := Vector2(0.5, 0.5)
 
+# Main Node paths
+@onready var hair_rear = $Body/Rig/Skeleton2D/HairRear
+@onready var hair_front = $Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/HairFront
+@onready var head = $Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/Head
+@onready var eye_left = $Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/EyeLeft
+@onready var eye_right = $Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/EyeRight
+@onready var pupil_left = $Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/EyeLeft/PupilLeft
+@onready var pupil_right = $Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/EyeRight/PupilRight
+@onready var brow_left = $Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/BrowLeft
+@onready var brow_right = $Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/BrowRight
+@onready var mouth = $Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/Mouth
+@onready var nose = $Body/Rig/Skeleton2D/TorsoBone/HeadBone/HeadGroup/Nose
+
+# Limb Node Paths
+@onready var upper_arm_left = $Body/Rig/Skeleton2D/TorsoBone/UpperArmLeftBone/UpperArmLeft
+@onready var lower_arm_left = $Body/Rig/Skeleton2D/TorsoBone/UpperArmLeftBone/LowerLeftArmBone/LowerArmLeft
+@onready var upper_arm_right = $Body/Rig/Skeleton2D/TorsoBone/UpperRightArmBone/UpperArmRight
+@onready var lower_arm_right = $Body/Rig/Skeleton2D/TorsoBone/UpperRightArmBone/LowerRightArmBone/LowerArmRight
+@onready var upper_leg_left = $Body/Rig/Skeleton2D/TorsoBone/UpperLegLeftBone/UpperLegLeft
+@onready var lower_leg_left = $Body/Rig/Skeleton2D/TorsoBone/UpperLegLeftBone/LowerLegLeftBone/LowerLegLeft
+@onready var upper_leg_right = $Body/Rig/Skeleton2D/TorsoBone/UpperLegRightBone/UpperLegRight
+@onready var lower_leg_right = $Body/Rig/Skeleton2D/TorsoBone/UpperLegRightBone/LowerLegRightBone/LowerLegRight
+
 func _ready():
 	
 	# Back Hair
-	$Head/HairRear.position = hair_position
-	$Head/HairRear.modulate = hair_color
-
+	hair_rear.position = hair_position
+	hair_rear.modulate = hair_color
+	$Body/Rig/Skeleton2D/TorsoBone/HeadBone/RearHairTransform.position = hair_position
 	
 	# Front Hair
-	$Head/HairFront.position = hair_position
-	$Head/HairFront.modulate = hair_color
+	hair_front.position = hair_position
+	hair_front.modulate = hair_color
 	
 	# Left Eye
-	$Head/EyeLeft.position = Vector2(-eye_distance, -eye_height)
-	$Head/EyeLeft.scale = eye_scale
-	$Head/EyeLeft.rotation_degrees = eye_rotation
+	eye_left.position = Vector2(-eye_distance, -eye_height)
+	eye_left.scale = eye_scale
+	eye_left.rotation_degrees = eye_rotation
 	
 	# Right Eye
-	$Head/EyeRight.position = Vector2(eye_distance, -eye_height)
-	$Head/EyeRight.scale = eye_scale
-	$Head/EyeRight.rotation_degrees = eye_rotation
+	eye_right.position = Vector2(eye_distance, -eye_height)
+	eye_right.scale = eye_scale
+	eye_right.rotation_degrees = eye_rotation
 	
 	# Left Pupil
-	$Head/EyeLeft/PupilLeft.scale = pupil_scale
-	$Head/EyeLeft/PupilLeft.position = pupil_position
-	$Head/EyeLeft/PupilLeft.modulate = pupil_color
+	pupil_left.scale = pupil_scale
+	pupil_left.position = pupil_position
+	pupil_left.modulate = pupil_color
 	
 	# Right Pupil
-	$Head/EyeRight/PupilRight.scale = pupil_scale
-	$Head/EyeRight/PupilRight.position = pupil_position
-	$Head/EyeRight/PupilRight.modulate = pupil_color
+	pupil_right.scale = pupil_scale
+	pupil_right.position = pupil_position
+	pupil_right.modulate = pupil_color
 	
 	# Left Brow
-	$Head/BrowLeft.position = Vector2(-brow_distance, -brow_height)
-	$Head/BrowLeft.scale = brow_scale
-	$Head/BrowLeft.modulate = hair_color
+	brow_left.position = Vector2(-brow_distance, -brow_height)
+	brow_left.scale = brow_scale
+	brow_left.modulate = hair_color
 	
 	# Right Brow
-	$Head/BrowRight.position = Vector2(brow_distance, -brow_height)
-	$Head/BrowRight.scale = brow_scale
-	$Head/BrowRight.modulate = hair_color
+	brow_right.position = Vector2(brow_distance, -brow_height)
+	brow_right.scale = brow_scale
+	brow_right.modulate = hair_color
 	
 	# Nose
-	$Head/Nose.position = nose_position
-	$Head/Nose.scale = nose_scale
+	nose.position = nose_position
+	nose.scale = nose_scale
 	
 	# Mouth
-	$Head/Mouth.position = Vector2(0, -mouth_height)
-	$Head/Mouth.modulate = mouth_color
+	mouth.position = Vector2(0, -mouth_height)
+	mouth.modulate = mouth_color
 	
 	# Head
-	$Head/Head.modulate = skin_color
+	head.modulate = skin_color
+	
+	# Limbs
+	color_limbs(skin_color)
 
 
 func _on_hair_front_change(type: Change, payload):
-	$Head/HairFront.change_request.emit(type, payload)
+	hair_front.change_request.emit(type, payload)
 
 
 func _on_hair_rear_change(type: Change, payload):
-	$Head/HairRear.change_request.emit(type, payload)
+	hair_rear.change_request.emit(type, payload)
 
 
 func _on_head_change(type: Change, payload):
-	$Head/Head.change_request.emit(type, payload)
+	head.change_request.emit(type, payload)
 
 
 func _on_mouth_change(type: Change, payload):
-	$Head/Mouth.change_request.emit(type, payload)
+	mouth.change_request.emit(type, payload)
 
 
 func _on_nose_change(type: Change, payload):
-	$Head/Nose.change_request.emit(type, payload)
+	nose.change_request.emit(type, payload)
 
 
 func _on_eye_change(type: Change, payload):
-	$Head/EyeLeft.change_request.emit(type, payload)
-	$Head/EyeRight.change_request.emit(type, payload)
+	eye_left.change_request.emit(type, payload)
+	eye_right.change_request.emit(type, payload)
 
 
 func _on_brow_change(type: Change, payload):
-	$Head/BrowLeft.change_request.emit(type, payload)
-	$Head/BrowRight.change_request.emit(type, payload)
+	brow_left.change_request.emit(type, payload)
+	brow_right.change_request.emit(type, payload)
 
 
 func _on_ear_change(type: Change, payload):
@@ -138,19 +164,30 @@ func _on_ear_change(type: Change, payload):
 
 
 func _on_pupil_change(type: Change, payload):
-	$Head/EyeLeft/PupilLeft.change_request.emit(type, payload)
-	$Head/EyeRight/PupilRight.change_request.emit(type, payload)
+	pupil_left.change_request.emit(type, payload)
+	pupil_right.change_request.emit(type, payload)
 
 
 func _on_randomize_character():
-	$Head/HairRear.randomize_everything()
-	$Head/Head.randomize_everything()
-	$Head/HairFront.randomize_everything()
-	$Head/BrowLeft.randomize_everything()
-	$Head/BrowRight.randomize_everything()
-	$Head/EyeLeft.randomize_everything()
-	$Head/EyeRight.randomize_everything()
-	$Head/EyeLeft/PupilLeft.randomize_everything()
-	$Head/EyeRight/PupilRight.randomize_everything()
-	$Head/Mouth.randomize_everything()
-	$Head/Nose.randomize_everything()
+	hair_rear.randomize_everything()
+	head.randomize_everything()
+	hair_front.randomize_everything()
+	brow_left.randomize_everything()
+	brow_right.randomize_everything()
+	eye_left.randomize_everything()
+	eye_right.randomize_everything()
+	pupil_left.randomize_everything()
+	pupil_right.randomize_everything()
+	mouth.randomize_everything()
+	nose.randomize_everything()
+
+
+func color_limbs(color: Color):
+	upper_arm_left.modulate = color
+	lower_arm_left.modulate = color
+	upper_arm_right.modulate = color
+	lower_arm_right.modulate = color
+	upper_leg_left.modulate = color
+	lower_leg_left.modulate = color
+	upper_leg_right.modulate = color
+	lower_leg_right.modulate = color
